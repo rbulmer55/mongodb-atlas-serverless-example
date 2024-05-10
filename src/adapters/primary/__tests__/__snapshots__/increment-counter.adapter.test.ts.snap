@@ -1,0 +1,8 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`increment-counter.adapter Adapter returns the counter on success 1`] = `
+{
+  "count": 3,
+  "id": "12345",
+}
+`;

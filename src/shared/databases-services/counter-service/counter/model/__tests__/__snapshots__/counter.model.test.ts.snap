@@ -1,0 +1,28 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Counter model should create when supplied properties 1`] = `
+{
+  "_id": "851e52e0-9444-4436-8f3d-6ffe47580458",
+  "count": 3,
+}
+`;
+
+exports[`Counter model should default the properties 1`] = `
+{
+  "_id": "1b9d6bcd-bbfd-4b2d-9b5d-ab8dfbbd4bed",
+  "count": 1,
+}
+`;
+
+exports[`Counter model validate should create id 1`] = `
+{
+  "_id": "1b9d6bcd-bbfd-4b2d-9b5d-ab8dfbbd4bed",
+  "count": 3,
+}
+`;
+
+exports[`Counter model validate should validate id 1`] = `
+{
+  "_id": [ValidatorError: Validator failed for path \`_id\` with value \`invalid-not-a-uuid\`],
+}
+`;

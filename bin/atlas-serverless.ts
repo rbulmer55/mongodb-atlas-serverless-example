@@ -1,21 +1,41 @@
 #!/usr/bin/env node
 import 'source-map-support/register';
 import * as cdk from 'aws-cdk-lib';
-import { AtlasServerlessStack } from '../lib/atlas-serverless-stack';
+import { PublicExampleStatefulStack } from '@infra/lib/pubic-example/stateful/public-example-stateful.stack';
+import { PublicExampleStatelessStack } from '@infra/lib/pubic-example/stateless/public-example-stateless.stack';
+import { InitSetupStack } from '@infra/lib/init-setup/init-setup-stack';
+import { PrivateExampleStatefulStack } from '@infra/lib/private-example/stateful/private-example-stateful.stack';
+import { PrivateExampleStatelessStack } from '@infra/lib/private-example/stateless/private-example-stateless.stack';
 
 const app = new cdk.App();
-new AtlasServerlessStack(app, 'AtlasServerlessStack', {
-  /* If you don't specify 'env', this stack will be environment-agnostic.
-   * Account/Region-dependent features and context lookups will not work,
-   * but a single synthesized template can be deployed anywhere. */
 
-  /* Uncomment the next line to specialize this stack for the AWS Account
-   * and Region that are implied by the current CLI configuration. */
-  // env: { account: process.env.CDK_DEFAULT_ACCOUNT, region: process.env.CDK_DEFAULT_REGION },
+new InitSetupStack(app, `AtlasSetupStack`, {});
 
-  /* Uncomment the next line if you know exactly what Account and Region you
-   * want to deploy the stack to. */
-  // env: { account: '123456789012', region: 'us-east-1' },
+/**
+ * Public Example
+ *
+ * Stateful: Atlas application vpc and atlas instance
+ * Stateless: Lambda with a security group and Connection secret
+ */
+const publicStateful = new PublicExampleStatefulStack(
+	app,
+	'PublicExampleStatefulStack'
+);
+new PublicExampleStatelessStack(app, 'PublicExampleStatelessStack', {
+	atlasVpc: publicStateful.applicationVpc,
+});
 
-  /* For more information, see https://docs.aws.amazon.com/cdk/latest/guide/environments.html */
+/**
+ * Private Example
+ *
+ * Stateful: Atlas application vpc and atlas instance with AWS PrivateLink
+ * Stateless: Lambda with a security group, Secrets Manager AWS PrivateLink and Connection secret
+ */
+const privateStateful = new PrivateExampleStatefulStack(
+	app,
+	'PrivateExampleStatefulStack'
+);
+new PrivateExampleStatelessStack(app, 'PrivateExampleStatelessStack', {
+	atlasVpc: privateStateful.applicationVpc,
+	atlasSecurityGroupId: privateStateful.atlasSecurityGroupId,
 });
