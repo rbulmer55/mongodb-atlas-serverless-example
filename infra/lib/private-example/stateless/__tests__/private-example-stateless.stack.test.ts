@@ -24,25 +24,6 @@ beforeEach(() => {
 	};
 });
 
-const mockVPC = (construct: Construct): IVpc => {
-	return new Vpc(construct, 'mocked-vpc', {
-		cidr: '10.0.0.0/16',
-		maxAzs: 2,
-		subnetConfiguration: [
-			{
-				cidrMask: 24,
-				name: 'pub-subnet',
-				subnetType: SubnetType.PUBLIC,
-			},
-			{
-				cidrMask: 28,
-				name: 'prv-subnet',
-				subnetType: SubnetType.PRIVATE_ISOLATED,
-			},
-		],
-	});
-};
-
 export const processTemplate = (template: Template) => {
 	return JSON.parse(
 		JSON.stringify(template, null, 4).replace(
