@@ -5,7 +5,7 @@ const { compilerOptions } = require('./.ts-path-config.json');
 
 module.exports = {
 	testEnvironment: 'node',
-	roots: ['<rootDir>/infra', '<rootDir>/src'],
+	roots: ['<rootDir>/infra', '<rootDir>/src', '<rootDir>/__mocks__'],
 	testMatch: ['**/*.test.ts'],
 	transform: {
 		'^.+\\.tsx?$': 'ts-jest',

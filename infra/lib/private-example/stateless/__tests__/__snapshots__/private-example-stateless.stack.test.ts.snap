@@ -20,7 +20,7 @@ exports[`All atlas-example stacks created and has correct properties Private Sta
           "S3Bucket": {
             "Fn::Sub": "cdk-hnb659fds-assets-\${AWS::AccountId}-\${AWS::Region}",
           },
-          "S3Key": "5bc602ecde93c947efe5899ae355f999986a1acbe610b1c0b9c468d738857555.zip",
+          "S3Key": "Any<String>",
         },
         "Handler": "index.handler",
         "Role": {
@@ -165,7 +165,7 @@ exports[`All atlas-example stacks created and has correct properties Private Sta
           "S3Bucket": {
             "Fn::Sub": "cdk-hnb659fds-assets-\${AWS::AccountId}-\${AWS::Region}",
           },
-          "S3Key": "933f6964caf466a58f6194bf8f2458da0cfc0c79fece88b695aec08cedfe392c.zip",
+          "S3Key": "Any<String>",
         },
         "Environment": {
           "Variables": {

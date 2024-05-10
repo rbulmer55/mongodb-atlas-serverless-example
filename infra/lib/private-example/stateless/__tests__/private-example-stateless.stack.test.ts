@@ -43,6 +43,15 @@ const mockVPC = (construct: Construct): IVpc => {
 	});
 };
 
+export const processTemplate = (template: Template) => {
+	return JSON.parse(
+		JSON.stringify(template, null, 4).replace(
+			/"S3Key":\s".+?\..+?"/gi,
+			'"S3Key": "Any<String>"'
+		)
+	);
+};
+
 describe('All atlas-example stacks created and has correct properties', () => {
 	test('Private Stateless Stack', () => {
 		const app = new App();
@@ -61,6 +70,6 @@ describe('All atlas-example stacks created and has correct properties', () => {
 			}
 		);
 
-		expect(Template.fromStack(stack)).toMatchSnapshot();
+		expect(processTemplate(Template.fromStack(stack))).toMatchSnapshot();
 	});
 });

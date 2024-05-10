@@ -10,6 +10,15 @@ const env = {
 	region: 'eu-west-1',
 };
 
+export const processTemplate = (template: Template) => {
+	return JSON.parse(
+		JSON.stringify(template, null, 4).replace(
+			/"S3Key":\s".+?\..+?"/gi,
+			'"S3Key": "Any<String>"'
+		)
+	);
+};
+
 beforeEach(() => {
 	jest.resetModules();
 	process.env = {
@@ -25,6 +34,6 @@ describe('All atlas-example stacks created and has correct properties', () => {
 		const app = new App();
 		const stack = new PublicExampleStatefulStack(app, 'PublicStack');
 
-		expect(Template.fromStack(stack)).toMatchSnapshot();
+		expect(processTemplate(Template.fromStack(stack))).toMatchSnapshot();
 	});
 });
