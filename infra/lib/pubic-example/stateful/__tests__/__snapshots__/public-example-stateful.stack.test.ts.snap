@@ -1,0 +1,325 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`All atlas-example stacks created and has correct properties Public Stateful Stack 1`] = `
+{
+  "Parameters": {
+    "BootstrapVersion": {
+      "Default": "/cdk-bootstrap/hnb659fds/version",
+      "Description": "Version of the CDK Bootstrap resources in this environment, automatically retrieved from SSM Parameter Store. [cdk:skip]",
+      "Type": "AWS::SSM::Parameter::Value<String>",
+    },
+  },
+  "Resources": {
+    "AppVpc80F1F7F9": {
+      "Properties": {
+        "CidrBlock": "10.0.0.0/16",
+        "EnableDnsHostnames": true,
+        "EnableDnsSupport": true,
+        "InstanceTenancy": "default",
+        "Tags": [
+          {
+            "Key": "Name",
+            "Value": "PublicStack/AppVpc",
+          },
+        ],
+      },
+      "Type": "AWS::EC2::VPC",
+    },
+    "AppVpcIGW826A76F0": {
+      "Properties": {
+        "Tags": [
+          {
+            "Key": "Name",
+            "Value": "PublicStack/AppVpc",
+          },
+        ],
+      },
+      "Type": "AWS::EC2::InternetGateway",
+    },
+    "AppVpcVPCGW1D33210A": {
+      "Properties": {
+        "InternetGatewayId": {
+          "Ref": "AppVpcIGW826A76F0",
+        },
+        "VpcId": {
+          "Ref": "AppVpc80F1F7F9",
+        },
+      },
+      "Type": "AWS::EC2::VPCGatewayAttachment",
+    },
+    "AppVpcfdvmydomainatlasexamplepubappSubnet1DefaultRouteA78CC1A6": {
+      "DependsOn": [
+        "AppVpcVPCGW1D33210A",
+      ],
+      "Properties": {
+        "DestinationCidrBlock": "0.0.0.0/0",
+        "GatewayId": {
+          "Ref": "AppVpcIGW826A76F0",
+        },
+        "RouteTableId": {
+          "Ref": "AppVpcfdvmydomainatlasexamplepubappSubnet1RouteTable49ADABF6",
+        },
+      },
+      "Type": "AWS::EC2::Route",
+    },
+    "AppVpcfdvmydomainatlasexamplepubappSubnet1RouteTable49ADABF6": {
+      "Properties": {
+        "Tags": [
+          {
+            "Key": "Name",
+            "Value": "PublicStack/AppVpc/fdv-mydomain-atlas-example-pub-appSubnet1",
+          },
+        ],
+        "VpcId": {
+          "Ref": "AppVpc80F1F7F9",
+        },
+      },
+      "Type": "AWS::EC2::RouteTable",
+    },
+    "AppVpcfdvmydomainatlasexamplepubappSubnet1RouteTableAssociation2B183C2C": {
+      "Properties": {
+        "RouteTableId": {
+          "Ref": "AppVpcfdvmydomainatlasexamplepubappSubnet1RouteTable49ADABF6",
+        },
+        "SubnetId": {
+          "Ref": "AppVpcfdvmydomainatlasexamplepubappSubnet1Subnet52809ED0",
+        },
+      },
+      "Type": "AWS::EC2::SubnetRouteTableAssociation",
+    },
+    "AppVpcfdvmydomainatlasexamplepubappSubnet1Subnet52809ED0": {
+      "Properties": {
+        "AvailabilityZone": {
+          "Fn::Select": [
+            0,
+            {
+              "Fn::GetAZs": "",
+            },
+          ],
+        },
+        "CidrBlock": "10.0.1.0/24",
+        "MapPublicIpOnLaunch": true,
+        "Tags": [
+          {
+            "Key": "aws-cdk:subnet-name",
+            "Value": "fdv-mydomain-atlas-example-pub-app",
+          },
+          {
+            "Key": "aws-cdk:subnet-type",
+            "Value": "Public",
+          },
+          {
+            "Key": "Name",
+            "Value": "PublicStack/AppVpc/fdv-mydomain-atlas-example-pub-appSubnet1",
+          },
+        ],
+        "VpcId": {
+          "Ref": "AppVpc80F1F7F9",
+        },
+      },
+      "Type": "AWS::EC2::Subnet",
+    },
+    "AppVpcfdvmydomainatlasexamplepvtappSubnet1RouteTable0365F362": {
+      "Properties": {
+        "Tags": [
+          {
+            "Key": "Name",
+            "Value": "PublicStack/AppVpc/fdv-mydomain-atlas-example-pvt-appSubnet1",
+          },
+        ],
+        "VpcId": {
+          "Ref": "AppVpc80F1F7F9",
+        },
+      },
+      "Type": "AWS::EC2::RouteTable",
+    },
+    "AppVpcfdvmydomainatlasexamplepvtappSubnet1RouteTableAssociationA124C048": {
+      "Properties": {
+        "RouteTableId": {
+          "Ref": "AppVpcfdvmydomainatlasexamplepvtappSubnet1RouteTable0365F362",
+        },
+        "SubnetId": {
+          "Ref": "AppVpcfdvmydomainatlasexamplepvtappSubnet1SubnetAB434092",
+        },
+      },
+      "Type": "AWS::EC2::SubnetRouteTableAssociation",
+    },
+    "AppVpcfdvmydomainatlasexamplepvtappSubnet1SubnetAB434092": {
+      "Properties": {
+        "AvailabilityZone": {
+          "Fn::Select": [
+            0,
+            {
+              "Fn::GetAZs": "",
+            },
+          ],
+        },
+        "CidrBlock": "10.0.0.0/24",
+        "MapPublicIpOnLaunch": false,
+        "Tags": [
+          {
+            "Key": "aws-cdk:subnet-name",
+            "Value": "fdv-mydomain-atlas-example-pvt-app",
+          },
+          {
+            "Key": "aws-cdk:subnet-type",
+            "Value": "Private",
+          },
+          {
+            "Key": "Name",
+            "Value": "PublicStack/AppVpc/fdv-mydomain-atlas-example-pvt-appSubnet1",
+          },
+        ],
+        "VpcId": {
+          "Ref": "AppVpc80F1F7F9",
+        },
+      },
+      "Type": "AWS::EC2::Subnet",
+    },
+    "pubSubnet0prvSubnet0route": {
+      "Properties": {
+        "DestinationCidrBlock": "0.0.0.0/0",
+        "NatGatewayId": {
+          "Fn::GetAtt": [
+            "pubSubnetNAT0",
+            "NatGatewayId",
+          ],
+        },
+        "RouteTableId": {
+          "Ref": "AppVpcfdvmydomainatlasexamplepvtappSubnet1RouteTable0365F362",
+        },
+      },
+      "Type": "AWS::EC2::Route",
+    },
+    "pubSubnetEIP0": {
+      "Type": "AWS::EC2::EIP",
+    },
+    "pubSubnetNAT0": {
+      "Properties": {
+        "AllocationId": {
+          "Fn::GetAtt": [
+            "pubSubnetEIP0",
+            "AllocationId",
+          ],
+        },
+        "SubnetId": {
+          "Ref": "AppVpcfdvmydomainatlasexamplepubappSubnet1Subnet52809ED0",
+        },
+      },
+      "Type": "AWS::EC2::NatGateway",
+    },
+    "publicAtlasServerlessPublicAtlasSlsInstancedbuserPublicAtlasSlsInstance32319347": {
+      "DependsOn": [
+        "publicAtlasServerlessPublicAtlasSlsInstanceprojectPublicAtlasSlsInstanceD27ED11E",
+      ],
+      "Properties": {
+        "DatabaseName": "admin",
+        "Password": "atlas-pwd",
+        "Profile": "fdv",
+        "ProjectId": {
+          "Fn::GetAtt": [
+            "publicAtlasServerlessPublicAtlasSlsInstanceprojectPublicAtlasSlsInstanceD27ED11E",
+            "Id",
+          ],
+        },
+        "Roles": [
+          {
+            "DatabaseName": "admin",
+            "RoleName": "atlasAdmin",
+          },
+        ],
+        "Scopes": [
+          {
+            "Name": "fdv-mydomain-atlas-example",
+            "Type": "CLUSTER",
+          },
+        ],
+        "Username": "fdv-mydomain-atlas-example-user",
+      },
+      "Type": "MongoDB::Atlas::DatabaseUser",
+    },
+    "publicAtlasServerlessPublicAtlasSlsInstanceipaccesslistPublicAtlasSlsInstance91DA5638": {
+      "DependsOn": [
+        "publicAtlasServerlessPublicAtlasSlsInstanceprojectPublicAtlasSlsInstanceD27ED11E",
+      ],
+      "Properties": {
+        "AccessList": [
+          {
+            "IPAddress": {
+              "Fn::GetAtt": [
+                "pubSubnetEIP0",
+                "PublicIp",
+              ],
+            },
+          },
+        ],
+        "Profile": "fdv",
+        "ProjectId": {
+          "Fn::GetAtt": [
+            "publicAtlasServerlessPublicAtlasSlsInstanceprojectPublicAtlasSlsInstanceD27ED11E",
+            "Id",
+          ],
+        },
+      },
+      "Type": "MongoDB::Atlas::ProjectIpAccessList",
+    },
+    "publicAtlasServerlessPublicAtlasSlsInstanceprojectPublicAtlasSlsInstanceD27ED11E": {
+      "Properties": {
+        "Name": "fdv-mydomain-atlas-example",
+        "OrgId": "6601e4d5b2150f6bf3d775e6",
+        "Profile": "fdv",
+      },
+      "Type": "MongoDB::Atlas::Project",
+    },
+    "publicAtlasServerlessPublicAtlasSlsInstanceserverlessPublicAtlasSlsInstance2187CB54": {
+      "DependsOn": [
+        "publicAtlasServerlessPublicAtlasSlsInstanceprojectPublicAtlasSlsInstanceD27ED11E",
+      ],
+      "Properties": {
+        "ContinuousBackupEnabled": false,
+        "Name": "fdv-mydomain-atlas-example",
+        "Profile": "fdv",
+        "ProjectID": {
+          "Fn::GetAtt": [
+            "publicAtlasServerlessPublicAtlasSlsInstanceprojectPublicAtlasSlsInstanceD27ED11E",
+            "Id",
+          ],
+        },
+        "ProviderSettings": {
+          "ProviderName": "SERVERLESS",
+          "RegionName": "EU_WEST_1",
+        },
+        "TerminationProtectionEnabled": false,
+      },
+      "Type": "MongoDB::Atlas::ServerlessInstance",
+    },
+  },
+  "Rules": {
+    "CheckBootstrapVersion": {
+      "Assertions": [
+        {
+          "Assert": {
+            "Fn::Not": [
+              {
+                "Fn::Contains": [
+                  [
+                    "1",
+                    "2",
+                    "3",
+                    "4",
+                    "5",
+                  ],
+                  {
+                    "Ref": "BootstrapVersion",
+                  },
+                ],
+              },
+            ],
+          },
+          "AssertDescription": "CDK bootstrap stack version 6 required. Please run 'cdk bootstrap' with a recent version of the CDK CLI.",
+        },
+      ],
+    },
+  },
+}
+`;

@@ -31,7 +31,6 @@ interface Config {
 	domain: string;
 	region: string;
 	mongoAtlasOrgId: string;
-	accountId: string;
 }
 
 if (!process.env.ENVIRONMENT) {
@@ -50,10 +49,6 @@ if (!process.env.DOMAIN_NAME) {
 	throw Error('Missing DomainName config');
 }
 
-if (!process.env.ACCOUNT_ID) {
-	throw Error('Missing AccountId config');
-}
-
 /**
  * Fetched from the MongoDB Atlas account portal
  */
@@ -67,5 +62,4 @@ export const config: Config = {
 	domain: process.env.DOMAIN_NAME,
 	region: process.env.REGION,
 	mongoAtlasOrgId: process.env.MONGO_ORG_ID,
-	accountId: process.env.ACCOUNT_ID,
 };
