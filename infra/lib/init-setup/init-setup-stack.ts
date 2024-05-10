@@ -14,6 +14,7 @@ export class InitSetupStack extends cdk.Stack {
 		const roleName = `MongoDB-Atlas-CDK-CFN-EXT-${config.domain}-${config.region}`;
 		const mongoDBProfile = config.environment;
 
+		// extend basic resources serverless and private routes
 		const bootstrapProperties: MongoAtlasBootstrapProps = {
 			roleName,
 			secretProfile: mongoDBProfile,

@@ -65,6 +65,7 @@ export class PublicAtlasServerless extends Construct {
 			},
 			ipAccessListProps: {
 				accessList: [
+					// map round our whitelist IP Props incase there are many
 					...props.atlas.ipWhitelist.map((ip): AccessListDefinition => {
 						return { ipAddress: ip };
 					}),
